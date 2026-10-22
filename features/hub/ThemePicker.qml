@@ -1,11 +1,14 @@
 import QtQuick
-import "../theme" as ThemeTokens
+import "../../theme" as ThemeTokens
 
 Item {
     id: root
+
     signal dismissed()
-    implicitWidth: 245
-    implicitHeight: 20
+    readonly property real desiredWidth: 360
+    readonly property real desiredHeight: 190
+
+    Keys.onEscapePressed: dismissed()
 
     Text {
         anchors.centerIn: parent

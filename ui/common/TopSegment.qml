@@ -1,5 +1,5 @@
 import QtQuick
-import "../theme" as ThemeTokens
+import "../../theme" as ThemeTokens
 
 Item {
     id: root

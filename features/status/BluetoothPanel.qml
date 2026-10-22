@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Bluetooth
-import "../theme" as ThemeTokens
+import "../../theme" as ThemeTokens
 
 Item {
     id: root

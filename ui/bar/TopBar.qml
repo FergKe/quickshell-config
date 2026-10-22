@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell
-import "../theme" as ThemeTokens
-import "../components" as Components
+import "../../theme" as ThemeTokens
+import "../common" as Common
 
 PanelWindow {
     id: panel
@@ -19,14 +19,14 @@ PanelWindow {
         anchors.fill: parent
         color: "transparent"
 
-        Components.TopSegment {
+        Common.TopSegment {
             anchors.left: parent.left
             anchors.top: parent.top
             edge: "left"
             width: workspaces.implicitWidth + 30
             height: ThemeTokens.Theme.barHeight
 
-            Components.Workspaces {
+            Workspaces {
                 id: workspaces
                 anchors.centerIn: parent
             }

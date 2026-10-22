@@ -2,11 +2,11 @@ import QtQuick
 import Quickshell.Bluetooth
 import Quickshell.Networking
 import Quickshell.Services.Pipewire
-import "../theme" as ThemeTokens
+import "../../theme" as ThemeTokens
 
 Row {
     id: root
-    required property QtObject statusState
+    required property QtObject shellState
     spacing: 12
 
     PwObjectTracker {
@@ -29,7 +29,7 @@ Row {
         MouseArea {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
-            onClicked: root.statusState.toggle(root.statusState.wifi)
+            onClicked: root.shellState.toggleStatus(root.shellState.statusWifi)
         }
     }
 
@@ -50,7 +50,7 @@ Row {
         MouseArea {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
-            onClicked: root.statusState.toggle(root.statusState.bluetooth)
+            onClicked: root.shellState.toggleStatus(root.shellState.statusBluetooth)
         }
     }
 
@@ -73,7 +73,7 @@ Row {
         MouseArea {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
-            onClicked: root.statusState.toggle(root.statusState.audio)
+            onClicked: root.shellState.toggleStatus(root.shellState.statusAudio)
         }
     }
 
@@ -96,7 +96,7 @@ Row {
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
-            onClicked: root.statusState.toggle(root.statusState.power)
+            onClicked: root.shellState.toggleStatus(root.shellState.statusPower)
         }
     }
 

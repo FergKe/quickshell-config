@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Networking
-import "../theme" as ThemeTokens
+import "../../theme" as ThemeTokens
 
 Item {
     id: root
@@ -203,6 +203,7 @@ Item {
         delegate: Rectangle {
             id: row
             required property var modelData
+            required property int index
             readonly property var network: modelData
             readonly property bool selected: root.selectedNetwork === network
             readonly property bool keyboardSelected: root.selectedIndex === index + 1

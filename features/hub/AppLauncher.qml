@@ -1,13 +1,20 @@
 import QtQuick
 import Quickshell
 import Quickshell.Widgets
-import "../theme" as ThemeTokens
+import "../../theme" as ThemeTokens
 
 Item {
     id: root
+
     signal dismissed()
+    readonly property real desiredWidth: 580
+    readonly property real desiredHeight: 470
     property int selectedIndex: 0
     property string query: ""
+
+    function takeFocus() {
+        search.forceActiveFocus()
+    }
 
     function fuzzyScore(haystack, needle) {
         const source = haystack.toLowerCase()
@@ -40,10 +47,6 @@ Item {
         dismissed()
     }
 
-    function focusSearch() {
-        search.forceActiveFocus()
-    }
-
     function resetSelection() {
         selectedIndex = filteredApps.values.length > 0 ? 0 : -1
         if (selectedIndex >= 0)
@@ -70,9 +73,7 @@ Item {
             launch(filteredApps.values[selectedIndex])
     }
 
-    Component.onCompleted: {
-        Qt.callLater(focusSearch)
-    }
+    Component.onCompleted: Qt.callLater(takeFocus)
 
     ScriptModel {
         id: filteredApps

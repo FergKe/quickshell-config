@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell.Hyprland
-import "../theme" as ThemeTokens
+import "../../theme" as ThemeTokens
 
 Row {
     id: root

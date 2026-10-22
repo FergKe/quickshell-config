@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell.Io
-import "../theme" as ThemeTokens
+import "../../theme" as ThemeTokens
 
 Item {
     id: root

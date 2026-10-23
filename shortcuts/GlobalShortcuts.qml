@@ -18,6 +18,12 @@ Item {
     }
 
     GlobalShortcut {
+        name: "toggle-notifications"
+        description: "Toggle the Quickshell notification centre"
+        onPressed: root.shellState.toggleHub(root.shellState.hubNotifications)
+    }
+
+    GlobalShortcut {
         name: "toggle-bluetooth"
         description: "Toggle the Quickshell Bluetooth controls"
         onPressed: root.shellState.toggleStatus(root.shellState.statusBluetooth)

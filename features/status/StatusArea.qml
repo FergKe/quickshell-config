@@ -3,7 +3,6 @@ import Quickshell.Bluetooth
 import Quickshell.Networking
 import Quickshell.Services.Pipewire
 import "../../theme" as ThemeTokens
-import "../../services" as Services
 
 Row {
     id: root
@@ -12,47 +11,6 @@ Row {
 
     PwObjectTracker {
         objects: [Pipewire.defaultAudioSink]
-    }
-
-    // Notification bell: shows the centre's count, a muted bell when empty, and
-    // a struck-through bell when Do Not Disturb is on. Click opens the centre.
-    Item {
-        width: bellRow.implicitWidth
-        height: 24
-
-        Row {
-            id: bellRow
-            anchors.centerIn: parent
-            spacing: 3
-
-            Text {
-                id: bellIcon
-                readonly property bool dnd: Services.NotificationService.dnd
-                readonly property int count: Services.NotificationService.count
-                text: dnd ? "󰂛" : count > 0 ? "󰂚" : "󰂜"
-                color: dnd ? ThemeTokens.Theme.warning
-                     : count > 0 ? ThemeTokens.Theme.accent
-                     : ThemeTokens.Theme.muted
-                font.family: ThemeTokens.Theme.fontFamily
-                font.pixelSize: 16
-            }
-
-            Text {
-                anchors.verticalCenter: bellIcon.verticalCenter
-                visible: !Services.NotificationService.dnd
-                         && Services.NotificationService.count > 0
-                text: Services.NotificationService.count
-                color: ThemeTokens.Theme.accent
-                font.family: ThemeTokens.Theme.fontFamily
-                font.pixelSize: ThemeTokens.Theme.fontSize - 2
-            }
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            onClicked: root.shellState.toggleHub(root.shellState.hubNotifications)
-        }
     }
 
     Item {

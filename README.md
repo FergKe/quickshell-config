@@ -12,6 +12,8 @@ growing `shell.qml` or the window implementations:
 shell.qml                 Application composition root
 features/hub/             Hub window, content router, and hub views
 features/status/          Status window and status controls
+features/notifications/   Notification popup surface and popup delegate
+services/                 Long-lived shell services (notification daemon)
 shortcuts/                Global shortcut registrations
 state/                    Shared shell UI state and navigation
 ui/bar/                   Top bar UI
@@ -38,6 +40,10 @@ protocol. Add this to your Hyprland Lua configuration, then reload Hyprland:
 ```lua
 hl.bind(mod .. " + SPACE", hl.dsp.global("quickshell:toggle-launcher"), {
     description = "Toggle Quickshell application launcher",
+})
+
+hl.bind(mod .. " + N", hl.dsp.global("quickshell:toggle-notifications"), {
+    description = "Toggle Quickshell notification centre",
 })
 
 hl.bind(mod .. " + B", hl.dsp.global("quickshell:toggle-bluetooth"), {
@@ -67,6 +73,27 @@ The right status box follows the same persistent-surface design. Bluetooth,
 Wi-Fi, audio, and power expand in place with `Super+B`, `Super+I`, `Super+A`,
 and `Super+Shift+P`. The power icon can also be clicked directly. Suspend happens
 immediately; restart and power-off require a second click to confirm.
+
+## Notifications
+
+The shell runs its own freedesktop notification daemon
+(`services/NotificationService.qml`), so it must be the only notification server
+on the system. If you currently run `mako`, `dunst`, or `swaync`, stop it and
+remove it from your Hyprland autostart, then reload Quickshell:
+
+```sh
+pkill mako        # or dunst / swaync
+```
+
+Incoming notifications slide in as popups just below the right status box,
+stay briefly, then slide back out — up to four at a time, with the rest queued.
+Critical notifications do not auto-dismiss. Hovering a popup pauses its timer;
+its close button hides it while keeping it in history.
+
+`Super+N` opens the notification centre in the hub, listing every notification
+with per-item delete, a **Clear all** button, and a **DND** toggle. Do Not
+Disturb suppresses popups while still logging notifications to the centre. All
+history is in-memory and resets when Quickshell reloads.
 
 Every expanded right-side menu supports keyboard control. Use `Up` and `Down`
 to move the highlighted selection, `Enter` to activate it, and `Escape` to
